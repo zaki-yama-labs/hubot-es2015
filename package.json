@@ -21,5 +21,12 @@
   },
   "engines": {
     "node": "0.10.x"
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC"
 }
