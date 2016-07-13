@@ -6,6 +6,7 @@
   "description": "A simple helpful robot for your Company",
   "scripts": {
     "build": "babel src --out-dir build",
+    "postinstall": "babel src --out-dir build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
