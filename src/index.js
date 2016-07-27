@@ -2,24 +2,25 @@ import request from 'request';
 
 module.exports = (robot) => {
   robot.respond(/.*(random|抽選).*/, (msg) => {
-    //msg.send(msg.message.id);
-    const url = 'https://slack.com/api/channels.list?token='
-      + process.env.HUBOT_SLACK_TOKEN;
-    //msg.send(url);
+    const url = 'https://slack.com/api/channels.list?token=' + process.env.HUBOT_SLACK_TOKEN;
 
-    // 1. チャンネル一覧を取得
+    // チャンネル一覧を取得
     request(url, (err, res, body) => {
-      let members;
-      for (const channel of JSON.parse(body).channels) {
-        if (channel.name === msg.message.room) {
-          console.log('Channel found');
-          console.log(channel);
-          members = channel.members;
-          break;
-        }
-      }
-      const member = msg.random(members);
-      msg.send('<@' + member + '> よろしくお願いします！');
+      // msg.message.room で現在の channel 名が取れる
+      const channel = findChannel(JSON.parse(body).channels, msg.message.room);
+      console.log('Channel found');
+      console.log(channel);
+      const member = msg.random(channel.members);
+      msg.send('選ばれたのは <@' + member + '> です');
     });
   });
 }
+
+function findChannel(channels, targetName) {
+  for (const channel of channels) {
+    if (channel.name === targetName) {
+      return channel;
+    }
+  }
+  return null;
+};
