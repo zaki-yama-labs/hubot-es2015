@@ -19,15 +19,7 @@ module.exports = (robot) => {
         }
       }
       const member = msg.random(members);
-
-      // 2. user.id から名前取得
-      const url = 'https://slack.com/api/users.info?token='
-        + process.env.HUBOT_SLACK_TOKEN
-        + '&user=' + member;
-      //console.log(url);
-      request(url, (err, res, body) => {
-        msg.send('<@' + JSON.parse(body).user.name + '> よろしくお願いします！');
-      });
+      msg.send('<@' + member + '> よろしくお願いします！');
     });
   });
 }
