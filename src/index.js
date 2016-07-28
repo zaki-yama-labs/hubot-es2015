@@ -10,7 +10,15 @@ module.exports = (robot) => {
       const channel = findChannel(JSON.parse(body).channels, msg.message.room);
       console.log('Channel found');
       console.log(channel);
-      const member = msg.random(channel.members);
+
+      // bot 自身を除外して抽選
+      const botId = robot.adapter.self.id;
+      const filterdMembers = channel.members.filter((member) => {
+        return member !== botId;
+      });
+      console.log(filterdMembers);
+      const member = msg.random(filterdMembers);
+
       msg.send('選ばれたのは <@' + member + '> です');
     });
   });
