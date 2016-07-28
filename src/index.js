@@ -1,7 +1,7 @@
 import request from 'request';
 
 module.exports = (robot) => {
-  robot.respond(/.*(random|抽選).*/, (msg) => {
+  robot.respond(/.*(random|抽選|選ぶ).*/, (msg) => {
     const url = 'https://slack.com/api/channels.list?token=' + process.env.HUBOT_SLACK_TOKEN;
 
     // チャンネル一覧を取得
@@ -19,7 +19,7 @@ module.exports = (robot) => {
       console.log(filterdMembers);
       const member = msg.random(filterdMembers);
 
-      msg.send('選ばれたのは <@' + member + '> です');
+      msg.send('選ばれたのは、 <@' + member + '> でした :tea:');
     });
   });
 }
