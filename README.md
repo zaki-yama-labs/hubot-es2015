@@ -54,7 +54,7 @@ To https://git.heroku.com/my-hubot-app.git
  * [new branch]      master -> master
 ```
 
-デプロイ環境の環境変数として、`HUBOT_SLACK_TOKEN` に加え、[hubot-slack-keepalive](https://github.com/hubot-scripts/hubot-heroku-keepalive) 用に `HUBOT_HEROKU_KEEPALIVE_URL` と `TZ` を設定します。
+デプロイ環境の環境変数として、`HUBOT_SLACK_TOKEN` に加え、[hubot-heroku-keepalive](https://github.com/hubot-scripts/hubot-heroku-keepalive) 用に `HUBOT_HEROKU_KEEPALIVE_URL` と `TZ` を設定します。
 
 ```zsh
 $ heroku config:add HUBOT_SLACK_TOKEN=XXX
