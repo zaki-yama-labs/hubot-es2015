@@ -1,5 +1,11 @@
 import request from 'request';
 
+const messages = [
+  '{name} さん、お願いします',
+  '選ばれたのは、{name} でした :tea:',
+  '{name} さん :pray:'
+];
+
 module.exports = (robot) => {
   robot.respond(/.*(random|抽選|選ぶ).*/, (msg) => {
     const url = 'https://slack.com/api/channels.list?token=' + process.env.HUBOT_SLACK_TOKEN;
@@ -19,7 +25,8 @@ module.exports = (robot) => {
       console.log(filterdMembers);
       const member = msg.random(filterdMembers);
 
-      msg.send('選ばれたのは、 <@' + member + '> でした :tea:');
+      const message = msg.random(messages);
+      msg.send(message.replace('{name}', `<@${member}>`));
     });
   });
 }
