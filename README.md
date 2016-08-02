@@ -1,14 +1,20 @@
 hubot-es2015
-------------
+============
 
 ES2015 で書いた Hubot のサンプル。
 Heroku にデプロイし、Slack Bot として利用することを想定しています。
 
-### Installation & Usage
+## 機能一覧
+
+- Slack のメンバーからランダムで一人選び、メンションをとばす機能 ([#1](https://github.com/zaki-yama/hubot-es2015/pull/1))
+    - チャンネルに bot を招待する
+    - bot に向かって `@hubot random` や `@hubot 抽選` とメンションすると、抽選で一人選んでメンションを返してくれる
+
+## インストール＆起動方法
 
 事前に Node.js と [Heroku Toolbelt](https://toolbelt.heroku.com/) をインストールしておく必要があります。
 
-##### パッケージのインストールとビルド
+### パッケージのインストールとビルド
 
 以下のコマンドを実行します。
 
@@ -19,7 +25,7 @@ $ npm install
 $ npm run build
 ```
 
-##### ローカルで起動
+### ローカルで起動
 
 `.env` ファイルを作成し、Slack の Hubot 設定ページからコピーした `HUBOT_SLACK_TOKEN` を記述します。
 
@@ -34,7 +40,7 @@ $ heroku local web
 ```
 
 
-##### Heroku にデプロイ
+### Heroku にデプロイ
 
 Heroku アプリケーションを作成し、デプロイします。
 
