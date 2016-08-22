@@ -4,6 +4,8 @@ hubot-es2015
 ES2015 で書いた Hubot のサンプル。
 Heroku にデプロイし、Slack Bot として利用することを想定しています。
 
+参考：[HubotをES2015で書いてHerokuにデプロイする - dackdive's blog](http://dackdive.hateblo.jp/entry/2016/07/13/210000)
+
 ## 機能一覧
 
 - Slack のメンバーからランダムで一人選び、メンションをとばす機能 ([#1](https://github.com/zaki-yama/hubot-es2015/pull/1))
@@ -68,3 +70,18 @@ $ heroku config:add HUBOT_SLACK_TOKEN=XXX
 $ heroku config:add HUBOT_HEROKU_KEEPALIVE_URL=https://my-hubot-app.herokuapp.com
 $ heroku config:add TZ=Asia/Tokyo
 ```
+
+また、毎朝決まった時間にスリープ状態から復旧させる必要があるため、[Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler) というアドオンを追加します。
+
+```
+$ heroku addons:create scheduler:standard
+$ heroku addons:open scheduler
+```
+
+新規ジョブを追加し、中央のコマンドには
+
+```
+$ curl ${HUBOT_HEROKU_KEEPALIVE_URL}heroku/keepalive
+```
+
+を指定し、起動する時刻を UTC で入力します。
